@@ -1,0 +1,228 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Gaming Keyboard Design System */
+@layer base {
+  :root {
+    /* Core Gaming Colors */
+    --primary: 264 100% 50%; /* Purple #6c00ff */
+    --primary-glow: 264 100% 65%;
+    --secondary: 318 100% 50%; /* Pink #ff00c8 */
+    --accent: 180 100% 50%; /* Cyan #00ffea */
+    --accent-glow: 180 100% 65%;
+    
+    /* Dark Gaming Background */
+    --background: 250 65% 3%; /* Dark #050210 */
+    --background-secondary: 250 50% 5%; /* Darker #0a0419 */
+    --foreground: 0 0% 94%; /* Light text #f0f0f0 */
+    
+    /* Card & Surface Colors */
+    --card: 250 30% 8%;
+    --card-foreground: 0 0% 94%;
+    --card-glow: 264 100% 50%;
+    
+    /* Interactive Elements */
+    --popover: 250 30% 8%;
+    --popover-foreground: 0 0% 94%;
+    
+    /* Muted & Subtle Colors */
+    --muted: 250 20% 15%;
+    --muted-foreground: 0 0% 75%;
+    
+    /* Gaming Button States */
+    --button-primary: 264 100% 50%;
+    --button-primary-hover: 264 100% 60%;
+    --button-secondary: 318 100% 50%;
+    --button-accent: 180 100% 50%;
+    
+    /* Borders & Inputs */
+    --border: 264 30% 20%;
+    --input: 250 30% 12%;
+    --ring: 264 100% 50%;
+    
+    /* Gaming Key Colors */
+    --key-background: 250 30% 8%;
+    --key-foreground: 0 0% 94%;
+    --key-glow: 180 100% 50%;
+    --key-active: 264 100% 50%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--primary)));
+    --gradient-glow: linear-gradient(135deg, hsl(var(--primary-glow)), hsl(var(--accent-glow)));
+    --gradient-dark: linear-gradient(135deg, hsl(var(--background)), hsl(var(--background-secondary)));
+    
+    /* Shadows & Effects */
+    --shadow-glow: 0 0 30px hsl(var(--primary) / 0.5);
+    --shadow-accent-glow: 0 0 20px hsl(var(--accent) / 0.6);
+    --shadow-card: 0 20px 40px hsl(var(--background) / 0.8);
+    --shadow-key: 0 8px 20px hsl(var(--background) / 0.6);
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --transition-fast: all 0.2s ease-out;
+    
+    /* Radius */
+    --radius: 0.75rem;
+    --radius-key: 0.5rem;
+    --radius-card: 1.25rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-rajdhani;
+    background: var(--gradient-dark);
+    overflow-x: hidden;
+    font-weight: 500;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-orbitron font-bold;
+    text-shadow: var(--shadow-glow);
+    letter-spacing: 0.05em;
+  }
+}
+
+@layer components {
+  /* Gaming Button Variants */
+  .btn-gaming {
+    @apply relative overflow-hidden font-orbitron font-semibold uppercase tracking-wider;
+    background: var(--gradient-primary);
+    padding: 1rem 2.5rem;
+    border-radius: 2rem;
+    transition: var(--transition-smooth);
+    border: none;
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+  }
+  
+  .btn-gaming::before {
+    @apply absolute inset-0 opacity-0;
+    content: '';
+    background: var(--gradient-accent);
+    transition: var(--transition-fast);
+    z-index: -1;
+  }
+  
+  .btn-gaming:hover {
+    transform: translateY(-0.5rem);
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .btn-gaming:hover::before {
+    @apply opacity-100;
+  }
+  
+  /* Gaming Key Style */
+  .gaming-key {
+    @apply relative overflow-hidden font-orbitron font-bold;
+    background: hsl(var(--key-background));
+    color: hsl(var(--key-foreground));
+    border: 2px solid hsl(var(--border));
+    border-radius: var(--radius-key);
+    transition: var(--transition-bounce);
+    box-shadow: var(--shadow-key);
+  }
+  
+  .gaming-key::before {
+    @apply absolute inset-0 opacity-0;
+    content: '';
+    background: var(--gradient-primary);
+    transition: var(--transition-fast);
+    z-index: -1;
+  }
+  
+  .gaming-key:hover {
+    transform: translateY(-0.25rem) scale(1.05);
+    border-color: hsl(var(--accent));
+    box-shadow: var(--shadow-accent-glow);
+  }
+  
+  .gaming-key:hover::before {
+    @apply opacity-20;
+  }
+  
+  .gaming-key.active {
+    background: var(--gradient-primary);
+    transform: translateY(-0.5rem) scale(1.1);
+    box-shadow: var(--shadow-glow);
+  }
+  
+  /* Gaming Card */
+  .gaming-card {
+    @apply relative overflow-hidden;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid hsl(var(--border));
+    border-radius: var(--radius-card);
+    transition: var(--transition-smooth);
+  }
+  
+  .gaming-card::before {
+    @apply absolute inset-0 opacity-0;
+    content: '';
+    background: var(--gradient-primary);
+    opacity: 0.1;
+    transition: var(--transition-fast);
+    z-index: -1;
+  }
+  
+  .gaming-card:hover {
+    transform: translateY(-1rem);
+    box-shadow: var(--shadow-card);
+    border-color: hsl(var(--accent));
+  }
+  
+  .gaming-card:hover::before {
+    @apply opacity-100;
+  }
+  
+  /* Glow Text Effect */
+  .text-glow {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .text-accent-glow {
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Floating Animation */
+  .float-animation {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  /* Pulse Glow Animation */
+  .pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite alternate;
+  }
+  
+  /* Shine Effect */
+  .shine-effect::before {
+    @apply absolute top-0 left-0 w-full h-full;
+    content: '';
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: translateX(-100%);
+    animation: shine 3s infinite;
+  }
+}
